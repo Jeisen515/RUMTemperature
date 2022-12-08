@@ -1,12 +1,24 @@
 #include <Arduino.h>
 #include <wifi.h>
+#include <PubSubClient.h>
+
 
 #define PIN_ANALOG_IN_TEMPERATURE 36
 #define PIN_ANALOG_IN_INTERRUPTOR 32
 
+//WIFI
 #define WIFI_NAME "LIB-8125217"
 #define WIFI_PASSWORD "cx4WrszcCswp"
 #define WIFI_TIMEOUT 10000
+
+//MQTT BROKER
+const char *mqttServer = "18.233.200.9";
+const char *topic = "esp32/temperature";
+const int mqttPort = 1883;
+
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 
 int calibration_time = 0;
@@ -23,8 +35,8 @@ float calculateHighestTemperature(float values[5]);
 float calculateLowestTemperature(float values[5]);
 void connectToWifi();
 
-void connectToWifi()
-{
+void connectToWifi(){
+
   Serial.println("Connecting to WiFi");
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
@@ -47,9 +59,26 @@ void connectToWifi()
   }
 }
 
+void connectToBroker(){
+client.setServer(mqttServer, mqttPort);
+ 
+while (!client.connected()) {
+    Serial.println("Connecting to MQTT...");
+
+    if (client.connect("ESP32Client")) {
+      Serial.println("connected");
+    } else {
+      Serial.print("failed with state ");
+      Serial.print(client.state());
+      delay(2000);
+    }
+}
+}
+
 void setup() {
   Serial.begin(9600);
   connectToWifi();
+  connectToBroker();
 }
 
 void loop() {
@@ -82,6 +111,15 @@ void loop() {
   }
   Serial.printf("Calibration Time: %d,\tVoltage : %.2fV, \tTemperature : %.2fC\n", calibration_time, voltage, tempC);
   delay(1000);
+
+  printf("Button: %.2f\n", button);
+
+  if (!client.connected())
+  {
+    connectToBroker();
+  }
+  client.publish(topic, String(tempC).c_str());
+  client.loop();
 }
 
 float recalibrate(float values[]){
