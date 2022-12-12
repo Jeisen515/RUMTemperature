@@ -7,13 +7,13 @@
 #define PIN_ANALOG_IN_INTERRUPTOR 32
 
 //WIFI
-#define WIFI_NAME "LIB-8125217"
+#define WIFI_NAME "LIB-8125217" //The wifi name and password must be changed to match the compatible networks
 #define WIFI_PASSWORD "cx4WrszcCswp"
 #define WIFI_TIMEOUT 10000
 
 //MQTT BROKER
 const char *mqttServer = "18.233.200.9";
-const char *topic = "Room204/temperature";
+const char *topic = "Room204/temperature"; //Must be changed to corresponding Room that each ESP will be located and info must match 
 const int mqttPort = 1883;
 
 
