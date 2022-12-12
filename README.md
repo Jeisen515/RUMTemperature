@@ -21,4 +21,4 @@ To use Siri the user must say: "Siri, college air conditioner status". Siri will
 ask the user for the specific room, in which case the user should say "Room XYZ" (XYZ=room number).
 
 Additionally, if the server is running, the user may see the temperature value by connecting to this website:
-http://18.233.200.9:1880/ui
+http://rumtemperature.com:1880/ui
