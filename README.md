@@ -11,6 +11,7 @@ In Projects one must specify that the board is an Espressif ESP-Wrover Kit.
 PlatformIO libraries to download:
   - Wrover Kit library
   - PubSub library
+  
 Afterwards build and download the project to the user's ESP32.
 
 Users must install Shortcuts on their Apple device and use the following shortcut:
