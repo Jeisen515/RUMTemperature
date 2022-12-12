@@ -13,7 +13,7 @@
 
 //MQTT BROKER
 const char *mqttServer = "18.233.200.9";
-const char *topic = "esp32/temperature";
+const char *topic = "Room204/temperature";
 const int mqttPort = 1883;
 
 
