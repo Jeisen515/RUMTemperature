@@ -22,3 +22,15 @@ ask the user for the specific room, in which case the user should say "Room XYZ"
 
 Additionally, if the server is running, the user may see the temperature value by connecting to this website:
 http://rumtemperature.com:1880/ui
+
+
+Tool set:
+VS Code IDE
+Platform IO
+Espressif Wrover library
+Arduino library
+Wifi library
+PubSub Client library
+AWS LightSail Cloud Server
+Node Red 
+Whois domain webservice
